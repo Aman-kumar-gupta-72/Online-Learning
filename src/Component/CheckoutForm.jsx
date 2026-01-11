@@ -8,6 +8,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Loader2, CheckCircle } from "lucide-react";
+import API from "../Config/Api";
 
 const CheckoutForm = ({ courseId, clientSecret }) => {
   const stripe = useStripe();
@@ -74,7 +75,7 @@ const CheckoutForm = ({ courseId, clientSecret }) => {
           console.log("📤 CONFIRMING WITH BACKEND");
 
           const { data } = await axios.post(
-            "http://localhost:2000/api/payment/confirm",
+            `${API}/api/payment/confirm`,
             {
               paymentIntentId: paymentIntent.id,
               courseId,

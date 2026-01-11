@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { CourseData } from "../Context/CourseContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { API } from "../main";
+import API from "../Config/Api";
 
 export default function PaymentDebug() {
   const { courses } = CourseData();

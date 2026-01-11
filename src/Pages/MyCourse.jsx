@@ -3,8 +3,7 @@ import { CourseData } from "../Context/CourseContext";
 import { useNavigate } from "react-router-dom";
 import { UserData } from "../Context/UserContext";
 import { BookOpen, Clock, Star, Play, AlertCircle } from "lucide-react";
-import { API } from "../main";
-
+import API from "../Config/Api";
 export default function MyCourse() {
   const navigate = useNavigate();
   const { myCourse } = CourseData();

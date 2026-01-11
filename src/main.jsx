@@ -6,10 +6,7 @@ import { UserContextProvider } from "./Context/UserContext.jsx";
 import { CourseContextProvider } from './Context/CourseContext.jsx';
 import { LectureContextProvider } from './Context/LectureContext.jsx';
 
-import { Import } from 'lucide-react';
 
-
-export const API = Import.Meta.env.VITE_API_URL
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

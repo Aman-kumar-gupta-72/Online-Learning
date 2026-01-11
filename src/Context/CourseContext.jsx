@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { API } from "../main";
+import API from "../Config/Api";
 
 const CourseContext = createContext(null);
 

@@ -18,7 +18,7 @@ import {
   ArrowLeft,
   Zap
 } from "lucide-react";
-import { API } from "../main";
+import API from "../Config/Api";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ||
     "pk_test_51SnCfZ6OkEHX6uzKW1zxPnbYz5vVctWUTyoQpGl1y1SHbJzX5knCMnFIX8Bxai5N8l11vOEYyNwJ5IqeYFmK0TE700JZ3lyyX8" 

@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import API from "../Config/Api";
 
 const UserContext = createContext();
 
@@ -14,7 +15,7 @@ export const UserContextProvider = ({ children }) => {
     setBtnLoading(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:2000/api/user/login",
+        `${API}/api/user/login`,
         { email, password }
       );
         console.log("🔐 LOGIN API RESPONSE:", data);
@@ -50,7 +51,7 @@ export const UserContextProvider = ({ children }) => {
       }
 
       const { data } = await axios.post(
-        "http://localhost:2000/api/user/register",
+        `${API}/api/user/register`,
         formData,
         {
           headers: {
@@ -76,7 +77,7 @@ export const UserContextProvider = ({ children }) => {
     const activationToken = localStorage.getItem("activationToken");
 
     const { data } = await axios.post(
-      "http://localhost:2000/api/user/verify",
+      `${API}/api/user/verify`,
       { otp, activationToken }
     );
 
@@ -100,7 +101,7 @@ const resendOtp = async () => {
     }
 
     const { data } = await axios.post(
-      "http://localhost:2000/api/user/resend-otp",
+    `${API}/api/user/resend-otp`,
       { activationToken }
     );
 

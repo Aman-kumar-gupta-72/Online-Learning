@@ -16,7 +16,7 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
-import { API } from "../main";
+import API from "../Config/Api";
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
