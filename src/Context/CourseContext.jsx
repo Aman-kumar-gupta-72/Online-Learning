@@ -13,7 +13,7 @@ export const CourseContextProvider = ({ children }) => {
 
   async function fetchCourses() {
     try {
-      const { data } = await axios.get(`${API}/api/course/all`);
+      const { data } = await axios.get(`https://your-backend.onrender.com/api/course/all`);
       console.log("📚 ALL COURSES FETCHED:", data.courses.length);
       setCourses(data.courses);
     } catch (error) {
@@ -32,7 +32,7 @@ export const CourseContextProvider = ({ children }) => {
     }
 
     try {
-      const { data } = await axios.get(`${API}/api/mycourse`, {
+      const { data } = await axios.get(`https://your-backend.onrender.com/api/mycourse`, {
         headers: {
           token: token,
         },
@@ -57,7 +57,7 @@ export const CourseContextProvider = ({ children }) => {
       });
 
       const { data } = await axios.post(
-        `${API}/api/course/${courseId}/enroll`,
+        `https://your-backend.onrender.com/api/course/${courseId}/enroll`,
         {},
         {
           headers: {
