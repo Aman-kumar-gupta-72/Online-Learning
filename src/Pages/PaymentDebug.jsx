@@ -97,7 +97,7 @@ export default function PaymentDebug() {
             <div>
               <strong>Stripe Key:</strong>
               <p className="font-mono">
-                {import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
+                {typeof import.meta !== "undefined" && import.meta.env && import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
                   ? "✅ Loaded"
                   : "❌ Missing"}
               </p>

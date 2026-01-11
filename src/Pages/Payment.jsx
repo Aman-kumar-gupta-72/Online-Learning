@@ -20,9 +20,14 @@ import {
 } from "lucide-react";
 import API from "../Config/Api";
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ||
-    "pk_test_51SnCfZ6OkEHX6uzKW1zxPnbYz5vVctWUTyoQpGl1y1SHbJzX5knCMnFIX8Bxai5N8l11vOEYyNwJ5IqeYFmK0TE700JZ3lyyX8" 
-);
+const getStripeKey = () => {
+  if (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY) {
+    return import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
+  }
+  return "pk_test_51SnCfZ6OkEHX6uzKW1zxPnbYz5vVctWUTyoQpGl1y1SHbJzX5knCMnFIX8Bxai5N8l11vOEYyNwJ5IqeYFmK0TE700JZ3lyyX8";
+};
+
+const stripePromise = loadStripe(getStripeKey());
 
 const Payment = () => {
   const { courseId } = useParams();

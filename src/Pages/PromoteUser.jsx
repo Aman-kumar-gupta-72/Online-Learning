@@ -4,7 +4,7 @@ import { UserData } from "../Context/UserContext";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Users, Shield, Mail, UserCheck, Trash2 } from "lucide-react";
-import { API } from "../main";
+import API from "../Config/Api";
 
 export default function PromoteUser() {
   const navigate = useNavigate();
