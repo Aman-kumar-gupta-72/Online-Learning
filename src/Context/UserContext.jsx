@@ -15,7 +15,7 @@ export const UserContextProvider = ({ children }) => {
     setBtnLoading(true);
     try {
       const { data } = await axios.post(
-        `https://your-backend.onrender.com/api/user/login`,
+        `${API}/api/user/login`,
         { email, password }
       );
         console.log("🔐 LOGIN API RESPONSE:", data);
@@ -51,7 +51,7 @@ export const UserContextProvider = ({ children }) => {
       }
 
       const { data } = await axios.post(
-        `https://your-backend.onrender.com/api/user/register`,
+        `${API}/api/user/register`,
         formData,
         {
           headers: {
@@ -77,7 +77,7 @@ export const UserContextProvider = ({ children }) => {
     const activationToken = localStorage.getItem("activationToken");
 
     const { data } = await axios.post(
-      `https://your-backend.onrender.com/api/user/verify`,
+      `${API}/api/user/verify`,
       { otp, activationToken }
     );
 
@@ -101,7 +101,7 @@ const resendOtp = async () => {
     }
 
     const { data } = await axios.post(
-    `https://your-backend.onrender.com/api/user/resend-otp`,
+    `${API}/api/user/resend-otp`,
       { activationToken }
     );
 
@@ -121,7 +121,7 @@ const resendOtp = async () => {
 
   try {
     const { data } = await axios.get(
-      `https://your-backend.onrender.com/api/user/me`,
+      `${API}/api/user/me`,
       {
         headers: {
           token: localStorage.getItem("token"),
@@ -164,7 +164,7 @@ const resendOtp = async () => {
     setBtnLoading(true);
     try {
       const { data } = await axios.post(
-        `https://your-backend.onrender.com/api/user/update-password`,
+        `${API}/api/user/update-password`,
         { currentPassword, newPassword },
         {
           headers: {

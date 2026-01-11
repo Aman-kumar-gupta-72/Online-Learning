@@ -67,7 +67,7 @@ export default function AdminDashboard() {
   const fetchCourses = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get("https://your-backend.onrender.com/api/course/all");
+      const { data } = await axios.get(`${API}/api/course/all`);
       setCourses(data.courses || []);
     } catch (error) {
       toast.error("Failed to fetch courses");
@@ -77,7 +77,7 @@ export default function AdminDashboard() {
 
   const fetchUsers = async () => {
     try {
-      const { data } = await axios.get(`https://your-backend.onrender.com/api/users`, {
+      const { data } = await axios.get(`${API}/api/users`, {
         headers: { token: localStorage.getItem("token") },
       });
       setUsers(data.users || []);
@@ -106,7 +106,7 @@ export default function AdminDashboard() {
 
     try {
       const { data } = await axios.post(
-        `https://your-backend.onrender.com/api/course/me`,
+        `${API}/api/course/me`,
         formData,
         {
           headers: {
@@ -128,7 +128,7 @@ export default function AdminDashboard() {
     if (!window.confirm("Delete this course? This will remove all lectures too.")) return;
 
     try {
-      await axios.delete(`https://your-backend.onrender.com/api/course/${courseId}`, {
+      await axios.delete(`${API}/api/course/${courseId}`, {
         headers: { token: localStorage.getItem("token") },
       });
       toast.success("Course deleted!");
