@@ -328,16 +328,22 @@ export default function StudentDashboard() {
 
               {myCourse && myCourse.length > 0 ? (
                 <div className="grid md:grid-cols-2 gap-6">
-                  {myCourse.map((course, index) => (
+                  {myCourse.map((course, index) => {
+                    // Construct proper image URL - if course.image is just a filename, prepend server path
+                    const imageUrl = course?.image ? 
+                      (course.image.startsWith('http') ? course.image : `http://localhost:2000/uploads/${course.image}`) 
+                      : null;
+                    
+                    return (
                     <div
                       key={index}
                       className="bg-gradient-to-br from-white to-gray-50 rounded-xl overflow-hidden border border-gray-200 hover:border-indigo-400 hover:shadow-lg transition-all duration-300"
                     >
                       {/* Course Image */}
                       <div className="relative h-40 bg-gradient-to-r from-indigo-400 to-purple-500 overflow-hidden">
-                        {course?.image && (
+                        {imageUrl && (
                           <img
-                            src={course.image}
+                            src={imageUrl}
                             alt={course?.title}
                             className="w-full h-full object-cover opacity-90"
                           />
@@ -398,7 +404,8 @@ export default function StudentDashboard() {
                         </button>
                       </div>
                     </div>
-                  ))}
+                    )
+                  })}
                 </div>
               ) : (
                 <div className="text-center py-12">

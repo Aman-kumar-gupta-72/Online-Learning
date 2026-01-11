@@ -4,6 +4,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Shield, Lock, Mail, User, ArrowRight } from "lucide-react";
 
+//admin registration karne ke liye component
+
 export default function AdminSetup() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -79,7 +81,7 @@ export default function AdminSetup() {
       setOtp("");
       setFormData({ name: "", email: "", password: "", confirmPassword: "" });
       
-      // Redirect to login after 2 seconds
+      // Redirect to login after 2 seconds 
       setTimeout(() => {
         navigate("/login");
       }, 2000);

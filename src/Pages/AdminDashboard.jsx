@@ -266,7 +266,7 @@ export default function AdminDashboard() {
               />
             </div>
 
-            {/* Recent Courses */}
+            {/* Recent course koun sa upyog kiye hai  */}
             <div className="bg-white rounded-xl shadow-lg p-8">
               <h2 className="text-2xl font-bold text-gray-800 mb-6">Recent Courses</h2>
               {courses.slice(0, 5).length > 0 ? (
@@ -309,10 +309,10 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* Courses Tab */}
+        {/* ye course tab ke liye jab ham course tab active rakhege */}
         {activeTab === "courses" && (
           <div className="space-y-8">
-            {/* Add Course Button */}
+            {/*  Course add karne ke liye  Button is per click karane se add ho jayega */}
             <div className="flex justify-between items-center">
               <h2 className="text-3xl font-bold text-gray-800">Manage Courses</h2>
               <button
@@ -324,7 +324,7 @@ export default function AdminDashboard() {
               </button>
             </div>
 
-            {/* Add Course Form */}
+            {/* koi naya course add karne ke liye from  */}
             {showAddCourse && (
               <div className="bg-white rounded-xl shadow-lg p-8 border border-indigo-200">
                 <h3 className="text-2xl font-bold text-gray-800 mb-6">Create New Course</h3>
@@ -449,7 +449,7 @@ export default function AdminDashboard() {
               </div>
             )}
 
-            {/* Search Courses */}
+            {/*  Courses ko search karne ke liye search bar */}
             <div className="relative">
               <Search className="absolute left-4 top-4 w-5 h-5 text-gray-400" />
               <input
@@ -461,7 +461,7 @@ export default function AdminDashboard() {
               />
             </div>
 
-            {/* Courses List */}
+            {/* ye course list ke liye kitna course hai mere websitepar */}
             <div className="grid gap-6">
               {loading ? (
                 <p className="text-center text-gray-600 py-8">Loading courses...</p>
@@ -517,7 +517,7 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* Users Tab */}
+        {/* ye user  tab hai kitna user hai mere pas */}
         {activeTab === "users" && (
           <div className="space-y-8">
             <h2 className="text-3xl font-bold text-gray-800">Manage Users</h2>

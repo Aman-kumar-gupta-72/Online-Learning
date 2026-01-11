@@ -4,7 +4,8 @@ import Header from './Component/Header/Header'
 import Footer from './Component/Footer/footer'
 import About from './Pages/About'
 import Contact from "./Pages/About"
-
+import Payment from './Pages/Payment'
+import PaymentSuccess from './Pages/PaymentSuccess'
 import Home from './Pages/Home'
 import  {UserData } from './Context/UserContext.jsx'
 import Login from './Pages/Login'
@@ -15,8 +16,10 @@ import AccountPage from './Pages/Acount'
 import LecturesPage from './Pages/Lectures'
 import AdminDashboard from './Pages/AdminDashboard'
 import AdminSetup from './Pages/AdminSetup'
-import DebugAdmin from './Pages/DebugAdmin'
+import PaymentDebug from './Pages/PaymentDebug'
+
 import PromoteUser from './Pages/PromoteUser'
+import MyCourse from './Pages/MyCourse'
 import { Toaster } from "react-hot-toast";
 import LoadingPage from './Component/Loading.jsx'
 
@@ -40,11 +43,15 @@ function App() {
           <Route path='/otp' element={<Otp/>} />
           <Route path='/course' element={<Course/>} />
           <Route path='/contact' element={<Contact/>} />
+          <Route path='/mycourse' element={isAuth?<MyCourse/>:<Login/>} />
+          <Route path='/payment/:courseId' element={<Payment/>} />
+          <Route path='/payment-success' element={<PaymentSuccess/>} />
           <Route path='/account' element={ isAuth ?<AccountPage/>:<Login/>} />
           <Route path='/lectures/:courseId' element={<LecturesPage/>} />
           <Route path='/admin' element={ <AdminDashboard/>} />
           <Route path='/admin-setup' element={<AdminSetup/>} />
-          <Route path='/debug-admin' element={<DebugAdmin/>} />
+          <Route path='/payment-debug' element={<PaymentDebug/>} />
+         
           <Route path='/promote-user' element={<PromoteUser/>} />
         </Routes>
        <Footer/>

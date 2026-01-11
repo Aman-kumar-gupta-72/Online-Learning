@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 const Otp = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
-  const { btnLoading, verify } = UserData();
+  const { btnLoading, verify, resendOtp } = UserData();
   const navigate = useNavigate();
 
   const handleChange = (value, index) => {
@@ -37,6 +37,17 @@ const Otp = () => {
     navigate("/login");                // ✔ valid here
   } catch (error) {
     toast.error(error.response?.data?.message || "OTP Wrong");
+  }
+};
+
+const handleResendOtp = async (e) => {
+  e.preventDefault();
+  const success = await resendOtp();
+  if (success) {
+    // Clear the OTP inputs
+    setOtp(["", "", "", ""]);
+    // Focus on first input
+    document.getElementById("otp-1")?.focus();
   }
 };
 
@@ -80,7 +91,12 @@ const Otp = () => {
         {/* Resend OTP */}
         <p className="text-center text-gray-700 mt-6">
           Didn’t receive code?{" "}
-          <button className="text-orange-800 font-semibold hover:underline">
+          <button 
+            type="button"
+            onClick={handleResendOtp}
+            disabled={btnLoading}
+            className="text-orange-800 font-semibold hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             Resend OTP
           </button>
         </p>

@@ -88,6 +88,33 @@ export const UserContextProvider = ({ children }) => {
   }
 };
 
+const resendOtp = async () => {
+  setBtnLoading(true);
+
+  try {
+    const activationToken = localStorage.getItem("activationToken");
+
+    if (!activationToken) {
+      toast.error("Activation token not found. Please register again.");
+      return;
+    }
+
+    const { data } = await axios.post(
+      "http://localhost:2000/api/user/resend-otp",
+      { activationToken }
+    );
+
+    localStorage.setItem("activationToken", data.activationToken);
+    toast.success(data.message);
+    return true;
+  } catch (error) {
+    toast.error(error.response?.data?.message || "Failed to resend OTP");
+    return false;
+  } finally {
+    setBtnLoading(false);
+  }
+};
+
  async function fetchUser() {
   setLoading(true);
 
@@ -222,6 +249,7 @@ export const UserContextProvider = ({ children }) => {
         logoutUser,
         registerUser,
         verify,
+        resendOtp,
         fetchUser,
         updatePassword,
         updateProfile,
