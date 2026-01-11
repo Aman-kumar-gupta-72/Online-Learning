@@ -3,6 +3,7 @@ import { CourseData } from "../Context/CourseContext";
 import { useNavigate } from "react-router-dom";
 import { UserData } from "../Context/UserContext";
 import { BookOpen, Clock, Star, Play, AlertCircle } from "lucide-react";
+import { API } from "../main";
 
 export default function MyCourse() {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ export default function MyCourse() {
               {myCourse.map((course) => {
                 // Construct proper image URL - if course.image is just a filename, prepend server path
                 const imageUrl = course.image ? 
-                  (course.image.startsWith('http') ? course.image : `http://localhost:2000/uploads/${course.image}`) 
+                  (course.image.startsWith('http') ? course.image : `${API}/uploads/${course.image}`) 
                   : "https://via.placeholder.com/400x300";
                 
                 return (

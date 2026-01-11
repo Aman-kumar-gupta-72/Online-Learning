@@ -4,6 +4,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { CheckCircle, AlertCircle } from "lucide-react";
 import { CourseData } from "../Context/CourseContext";
+import { API } from "../main";
 
 const PaymentSuccess = () => {
   const [searchParams] = useSearchParams();

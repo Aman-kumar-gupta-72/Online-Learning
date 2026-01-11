@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Shield, Lock, Mail, User, ArrowRight } from "lucide-react";
+import { API } from "../main";
 
 //admin registration karne ke liye component
 

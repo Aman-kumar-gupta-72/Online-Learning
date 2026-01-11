@@ -4,6 +4,7 @@ import { UserData } from "../Context/UserContext";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Users, Shield, Mail, UserCheck, Trash2 } from "lucide-react";
+import { API } from "../main";
 
 export default function PromoteUser() {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ export default function PromoteUser() {
     setPromoting({ ...promoting, [email]: true });
     try {
       const { data } = await axios.post(
-        "`{V}/api/user/promote",
+        `${API}/api/user/promote`,
         { email },
         { headers: { token: localStorage.getItem("token") } }
       );
