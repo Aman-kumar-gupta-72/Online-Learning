@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router'
 import Header from './Component/Header/Header'
-import Footer from './Component/Footer/footer'
+import Footer from './Component/Footer/Footer'
 import About from './Pages/About'
 import Contact from "./Pages/About"
 import Payment from './Pages/Payment'
