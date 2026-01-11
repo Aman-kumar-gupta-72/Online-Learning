@@ -29,7 +29,7 @@ export default function PromoteUser() {
     const fetchUsers = async () => {
       setLoading(true);
       try {
-        const { data } = await axios.get("http://localhost:2000/api/users", {
+        const { data } = await axios.get(`${API}/api/users`, {
           headers: { token: localStorage.getItem("token") },
         });
         setUsers(data.users || []);
@@ -48,7 +48,7 @@ export default function PromoteUser() {
     setPromoting({ ...promoting, [email]: true });
     try {
       const { data } = await axios.post(
-        "http://localhost:2000/api/user/promote",
+        "`{V}/api/user/promote",
         { email },
         { headers: { token: localStorage.getItem("token") } }
       );
@@ -72,7 +72,7 @@ export default function PromoteUser() {
     setPromoting({ ...promoting, [email]: true });
     try {
       const { data } = await axios.post(
-        "http://localhost:2000/api/user/demote",
+        `${API}/api/user/demote`,
         { email },
         { headers: { token: localStorage.getItem("token") } }
       );

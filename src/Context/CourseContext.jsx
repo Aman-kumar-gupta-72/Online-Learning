@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { API } from "../main";
 
 const CourseContext = createContext(null);
 
@@ -12,7 +13,7 @@ export const CourseContextProvider = ({ children }) => {
 
   async function fetchCourses() {
     try {
-      const { data } = await axios.get("http://localhost:2000/api/course/all");
+      const { data } = await axios.get(`${API}/api/course/all`);
       console.log("📚 ALL COURSES FETCHED:", data.courses.length);
       setCourses(data.courses);
     } catch (error) {
@@ -31,7 +32,7 @@ export const CourseContextProvider = ({ children }) => {
     }
 
     try {
-      const { data } = await axios.get("http://localhost:2000/api/mycourse", {
+      const { data } = await axios.get(`${API}/api/mycourse`, {
         headers: {
           token: token,
         },
@@ -56,7 +57,7 @@ export const CourseContextProvider = ({ children }) => {
       });
 
       const { data } = await axios.post(
-        `http://localhost:2000/api/course/${courseId}/enroll`,
+        `${API}/api/course/${courseId}/enroll`,
         {},
         {
           headers: {

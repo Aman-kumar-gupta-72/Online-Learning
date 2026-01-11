@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { CourseData } from "../Context/CourseContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API } from "../main";
 
 export default function PaymentDebug() {
   const { courses } = CourseData();
@@ -13,7 +14,7 @@ export default function PaymentDebug() {
     // Test API connectivity
     const testAPI = async () => {
       try {
-        const response = await axios.get("http://localhost:2000/api/test", {
+        const response = await axios.get(`${API}/api/test`, {
           timeout: 5000,
         });
         setApiStatus("✅ API is reachable: " + response.status);
@@ -36,7 +37,7 @@ export default function PaymentDebug() {
 
     try {
       const response = await axios.post(
-        "http://localhost:2000/api/payment/create-intent",
+        `${API}/api/payment/create-intent`,
         {
           amount: 99,
           currency: "usd",
@@ -80,7 +81,7 @@ export default function PaymentDebug() {
             <div>
               <strong>Backend URL:</strong>
               <p className="font-mono text-blue-600">
-                http://localhost:2000/api
+                {API}/api
               </p>
             </div>
             <div>

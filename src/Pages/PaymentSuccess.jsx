@@ -37,7 +37,7 @@ const PaymentSuccess = () => {
         });
 
         const { data } = await axios.post(
-          `http://localhost:2000/api/payment/confirm`,
+          `${API}/api/payment/confirm`,
           {
             paymentIntentId: paymentIntent,
             courseId: courseId || ""

@@ -112,7 +112,7 @@ export default function Course() {
               const enrolled = isEnrolled(course._id);
               // Construct proper image URL - if course.image is just a filename, prepend server path
               const imageUrl = course.image ? 
-                (course.image.startsWith('http') ? course.image : `http://localhost:2000/uploads/${course.image}`) 
+                (course.image.startsWith('http') ? course.image : `${API}/uploads/${course.image}`) 
                 : student;
               
               return (

@@ -16,6 +16,7 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
+import { API } from "../main";
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -66,7 +67,7 @@ export default function AdminDashboard() {
   const fetchCourses = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get("http://localhost:2000/api/course/all");
+      const { data } = await axios.get(`${API}/api/course/all`);
       setCourses(data.courses || []);
     } catch (error) {
       toast.error("Failed to fetch courses");
@@ -76,7 +77,7 @@ export default function AdminDashboard() {
 
   const fetchUsers = async () => {
     try {
-      const { data } = await axios.get("http://localhost:2000/api/users", {
+      const { data } = await axios.get(`${API}/api/users`, {
         headers: { token: localStorage.getItem("token") },
       });
       setUsers(data.users || []);
@@ -105,7 +106,7 @@ export default function AdminDashboard() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:2000/api/course/me",
+        `${API}/api/course/me`,
         formData,
         {
           headers: {
@@ -127,7 +128,7 @@ export default function AdminDashboard() {
     if (!window.confirm("Delete this course? This will remove all lectures too.")) return;
 
     try {
-      await axios.delete(`http://localhost:2000/api/course/${courseId}`, {
+      await axios.delete(`${API}/api/course/${courseId}`, {
         headers: { token: localStorage.getItem("token") },
       });
       toast.success("Course deleted!");
@@ -141,7 +142,7 @@ export default function AdminDashboard() {
     if (!window.confirm(`Delete user account: ${userName}? This action cannot be undone.`)) return;
 
     try {
-      const { data } = await axios.delete("http://localhost:2000/api/user/delete-user", {
+      const { data } = await axios.delete(`${API}/api/user/delete-user`, {
         headers: { token: localStorage.getItem("token") },
         data: { userId },
       });

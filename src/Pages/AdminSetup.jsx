@@ -46,7 +46,7 @@ export default function AdminSetup() {
 
     setLoading(true);
     try {
-      const { data } = await axios.post("http://localhost:2000/api/user/create-admin", {
+      const { data } = await axios.post(`${API}/api/user/create-admin`, {
         name: formData.name,
         email: formData.email,
         password: formData.password,
@@ -72,7 +72,7 @@ export default function AdminSetup() {
 
     setLoading(true);
     try {
-      const { data } = await axios.post("http://localhost:2000/api/user/verify", {
+      const { data } = await axios.post(`${API}/api/user/verify`, {
         otp: parseInt(otp),
         activationToken,
       });

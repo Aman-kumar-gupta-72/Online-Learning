@@ -12,7 +12,7 @@ export const LectureContextProvider = ({ children }) => {
   async function fetchLectures(courseId) {
     setLectureLoading(true);
     try {
-      const { data } = await axios.get(`http://localhost:2000/api/lecture/${courseId}`, {
+      const { data } = await axios.get(`${API}:2000/api/lecture/${courseId}`, {
         headers: {
           token: localStorage.getItem("token"),
         },
@@ -32,7 +32,7 @@ export const LectureContextProvider = ({ children }) => {
     setAddingLecture(true);
     try {
       const { data } = await axios.post(
-        `http://localhost:2000/api/course/${courseId}`,
+        `${API}/api/course/${courseId}`,
         formData,
         {
           headers: {
@@ -55,7 +55,7 @@ export const LectureContextProvider = ({ children }) => {
   async function deleteLecture(lectureId, courseId) {
     try {
       const { data } = await axios.delete(
-        `http://localhost:2000/api/lecture/${lectureId}`,
+        `${API}/api/lecture/${lectureId}`,
         {
           headers: {
             token: localStorage.getItem("token"),

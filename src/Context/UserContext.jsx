@@ -120,7 +120,7 @@ const resendOtp = async () => {
 
   try {
     const { data } = await axios.get(
-      "http://localhost:2000/api/user/me",
+      `${API}/api/user/me`,
       {
         headers: {
           token: localStorage.getItem("token"),
@@ -163,7 +163,7 @@ const resendOtp = async () => {
     setBtnLoading(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:2000/api/user/update-password",
+        `${API}/api/user/update-password`,
         { currentPassword, newPassword },
         {
           headers: {
@@ -185,7 +185,7 @@ const resendOtp = async () => {
     setBtnLoading(true);
     try {
       const { data } = await axios.delete(
-        "http://localhost:2000/api/user/delete-account",
+        `${API}/api/user/delete-account`,
         {
           headers: {
             token: localStorage.getItem("token"),
@@ -215,7 +215,7 @@ const resendOtp = async () => {
       if (profilePic) formData.append("file", profilePic);
 
       const { data } = await axios.put(
-        "http://localhost:2000/api/user/update-profile",
+        `${API}/api/user/update-profile`,
         formData,
         {
           headers: {
