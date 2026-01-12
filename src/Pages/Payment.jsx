@@ -219,7 +219,7 @@ const Payment = () => {
               <div className="relative h-48 overflow-hidden bg-gradient-to-br from-blue-400 to-purple-600">
                 {course.image && (
                   <img
-                    src={course.image.startsWith("http") ? course.image : `http://localhost:2000/uploads/${course.image}`}
+                    src={course.image.startsWith("http") ? course.image : `${API}/uploads/${course.image}`}
                     alt={course.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />

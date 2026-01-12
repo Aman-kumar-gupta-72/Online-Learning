@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { UserData } from "../Context/UserContext";
 import { CourseData } from "../Context/CourseContext";
 import { useNavigate, useSearchParams } from "react-router";
+import API from "../Config/Api";
 import { BookOpen, Award, Clock, Settings, LogOut, Edit2, Eye, EyeOff, Mail, User as UserIcon, Zap, X } from "lucide-react";
 
 export default function StudentDashboard() {
@@ -331,7 +332,7 @@ export default function StudentDashboard() {
                   {myCourse.map((course, index) => {
                     // Construct proper image URL - if course.image is just a filename, prepend server path
                     const imageUrl = course?.image ? 
-                      (course.image.startsWith('http') ? course.image : `http://localhost:2000/uploads/${course.image}`) 
+                      (course.image.startsWith('http') ? course.image : `${API}/uploads/${course.image}`) 
                       : null;
                     
                     return (

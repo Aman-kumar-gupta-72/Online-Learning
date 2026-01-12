@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router";
 import { UserData } from "../Context/UserContext";
 import { useLecture } from "../Context/LectureContext";
 import { CourseData } from "../Context/CourseContext";
+import API from "../Config/Api";
 import { Play, Plus, Trash2, Clock, User as UserIcon, FileText } from "lucide-react";
 
 export default function LecturesPage() {
@@ -307,11 +308,11 @@ export default function LecturesPage() {
                   key={selectedLecture._id}
                 >
                   <source
-                    src={`http://localhost:2000/${selectedLecture.video}`}
+                    src={`${API}/${selectedLecture.video}`}
                     type="video/mp4"
                   />
                   <source
-                    src={`http://localhost:2000/${selectedLecture.video}`}
+                    src={`${API}/${selectedLecture.video}`}
                     type="video/webm"
                   />
                   Your browser does not support the video tag.

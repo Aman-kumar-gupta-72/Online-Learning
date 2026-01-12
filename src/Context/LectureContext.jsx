@@ -13,7 +13,7 @@ export const LectureContextProvider = ({ children }) => {
   async function fetchLectures(courseId) {
     setLectureLoading(true);
     try {
-      const { data } = await axios.get("/api/lecture/${courseId}", {
+      const { data } = await axios.get(`${API}/api/lecture/${courseId}`, {
         headers: {
           token: localStorage.getItem("token"),
         },

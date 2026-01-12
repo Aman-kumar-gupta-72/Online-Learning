@@ -13,11 +13,16 @@ export const CourseContextProvider = ({ children }) => {
 
   async function fetchCourses() {
     try {
+      console.log("🌐 FETCHING COURSES FROM:", `${API}/api/course/all`);
       const { data } = await axios.get(`${API}/api/course/all`);
       console.log("📚 ALL COURSES FETCHED:", data.courses.length);
-      setCourses(data.courses);
+      console.log("📚 COURSES DATA:", data);
+      setCourses(data.courses || []);
     } catch (error) {
       console.log("❌ Error fetching courses:", error);
+      console.log("❌ Error response:", error.response?.data);
+      console.log("❌ Error message:", error.message);
+      setCourses([]);
     }
   }
 

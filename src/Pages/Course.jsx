@@ -110,10 +110,8 @@ export default function Course() {
           ) : (
             courses.map((course) => {
               const enrolled = isEnrolled(course._id);
-              // Construct proper image URL - if course.image is just a filename, prepend server path
-              const imageUrl = course.image ? 
-                (course.image.startsWith('http') ? course.image : `${API}/uploads/${course.image}`) 
-                : student;
+              // Image URL is now already processed by backend to be absolute
+              const imageUrl = course.image || student;
               
               return (
                 <div key={course._id} className="group shadow-lg rounded-2xl overflow-hidden bg-white hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
