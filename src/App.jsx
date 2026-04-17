@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router'
 import Header from './Component/Header/Header'
 import Footer from './Component/Footer/Footer'
 import About from './Pages/About'
-import Contact from "./Pages/About"
+import Contact from "./Pages/Contact"
 import Payment from './Pages/Payment'
 import PaymentSuccess from './Pages/PaymentSuccess'
 import Home from './Pages/Home'

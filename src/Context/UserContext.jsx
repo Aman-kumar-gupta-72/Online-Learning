@@ -117,8 +117,6 @@ const resendOtp = async () => {
 };
 
  async function fetchUser() {
-  setLoading(true);
-
   try {
     const { data } = await axios.get(
       `${API}/api/user/me`,
@@ -140,14 +138,14 @@ const resendOtp = async () => {
   } catch (error) {
     console.log("❌ ME API ERROR:", error);
     setIsAuth(false);
-  } finally {
-    setLoading(false);
   }
 }
 
 
 
   useEffect(() => {
+    // Load user data in background without blocking UI
+    setLoading(false);
     fetchUser();
   }, []);   // important!!
 

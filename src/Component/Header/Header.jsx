@@ -38,7 +38,19 @@ const Header = () => {
         <div className="flex flex-col md:flex-row md:gap-8 text-lg px-6 md:px-0">
           {isAuth && user?.role === "admin" ? (
             // Admin Menu
-            ["Home", "About", "Course"].map((item) => (
+            ["Home", "About", "Course", "Contact"].map((item) => (
+              <Link
+                key={item}
+                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                className="relative group py-2 font-semibold"
+              >
+                {item}
+                <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            ))
+          ) : isAuth ? (
+            // Logged In User Menu
+            ["Home", "About", "Course", "Contact", "Account"].map((item) => (
               <Link
                 key={item}
                 to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
@@ -49,8 +61,8 @@ const Header = () => {
               </Link>
             ))
           ) : (
-            // User/Guest Menu
-            ["Home", "About", "Course", "Account"].map((item) => (
+            // Guest Menu (Not Logged In)
+            ["Home", "About", "Course", "Contact"].map((item) => (
               <Link
                 key={item}
                 to={item === "Home" ? "/" : `/${item.toLowerCase()}`}

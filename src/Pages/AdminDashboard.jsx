@@ -15,6 +15,8 @@ import {
   ChevronDown,
   Eye,
   EyeOff,
+  Mail,
+  X,
 } from "lucide-react";
 import API from "../Config/Api";
 
@@ -26,6 +28,14 @@ export default function AdminDashboard() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+
+  // Email sending form states
+  const [showSendEmail, setShowSendEmail] = useState(false);
+  const [emailForm, setEmailForm] = useState({
+    subject: "",
+    message: "",
+  });
+  const [emailLoading, setEmailLoading] = useState(false);
 
   // Add Course Form
   const [showAddCourse, setShowAddCourse] = useState(false);
@@ -151,6 +161,43 @@ export default function AdminDashboard() {
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to delete user");
     }
+  };
+
+  const handleSendEmailToAllUsers = async (e) => {
+    e.preventDefault();
+    
+    if (!emailForm.subject.trim() || !emailForm.message.trim()) {
+      toast.error("Subject and message are required");
+      return;
+    }
+
+    setEmailLoading(true);
+    try {
+      const { data } = await axios.post(
+        `${API}/api/send-mail-all-users`,
+        {
+          subject: emailForm.subject,
+          message: emailForm.message,
+        },
+        {
+          headers: { token: localStorage.getItem("token") },
+        }
+      );
+
+      toast.success(
+        `Email sent successfully! (${data.results.successfulEmails}/${data.results.totalUsers} users)`
+      );
+      
+      if (data.results.failedEmails > 0) {
+        toast.error(`Failed to send to ${data.results.failedEmails} users`);
+      }
+
+      setEmailForm({ subject: "", message: "" });
+      setShowSendEmail(false);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to send emails");
+    }
+    setEmailLoading(false);
   };
 
   // Filter courses based on search
@@ -521,7 +568,104 @@ export default function AdminDashboard() {
         {/* ye user  tab hai kitna user hai mere pas */}
         {activeTab === "users" && (
           <div className="space-y-8">
-            <h2 className="text-3xl font-bold text-gray-800">Manage Users</h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-3xl font-bold text-gray-800">Manage Users</h2>
+              <button
+                onClick={() => setShowSendEmail(true)}
+                className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2 shadow-lg"
+                title="Send email to all users"
+              >
+                <Mail className="w-5 h-5" />
+                Send Email to All
+              </button>
+            </div>
+
+            {/* Email Form Modal */}
+            {showSendEmail && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                  <div className="sticky top-0 bg-white border-b p-6 flex justify-between items-center">
+                    <h3 className="text-2xl font-bold text-gray-800">Send Email to All Users</h3>
+                    <button
+                      onClick={() => setShowSendEmail(false)}
+                      className="text-gray-500 hover:text-gray-700"
+                    >
+                      <X className="w-6 h-6" />
+                    </button>
+                  </div>
+
+                  <form onSubmit={handleSendEmailToAllUsers} className="p-6 space-y-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Subject *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={emailForm.subject}
+                        onChange={(e) =>
+                          setEmailForm({ ...emailForm, subject: e.target.value })
+                        }
+                        placeholder="Enter email subject"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Message *
+                      </label>
+                      <textarea
+                        required
+                        value={emailForm.message}
+                        onChange={(e) =>
+                          setEmailForm({ ...emailForm, message: e.target.value })
+                        }
+                        placeholder="Enter your message here..."
+                        rows="8"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
+                      />
+                      <p className="text-xs text-gray-500 mt-2">
+                        This email will be sent to {users.length} registered user{users.length !== 1 ? 's' : ''}
+                      </p>
+                    </div>
+
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                      <p className="text-sm text-blue-800">
+                        <strong>ℹ️ Note:</strong> The email will be sent with proper HTML formatting to all active users in the system.
+                      </p>
+                    </div>
+
+                    <div className="flex gap-4 pt-4">
+                      <button
+                        type="submit"
+                        disabled={emailLoading}
+                        className="flex-1 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white py-3 rounded-lg font-semibold transition flex items-center justify-center gap-2"
+                      >
+                        {emailLoading ? (
+                          <>
+                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            <Mail className="w-5 h-5" />
+                            Send Email
+                          </>
+                        )}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setShowSendEmail(false)}
+                        className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 py-3 rounded-lg font-semibold transition"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            )}
 
             <div className="bg-white rounded-xl shadow-lg p-8">
               <h3 className="text-xl font-bold text-gray-800 mb-6">User Access Control</h3>
